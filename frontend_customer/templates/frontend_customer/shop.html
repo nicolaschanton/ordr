@@ -1,0 +1,109 @@
+{% extends "frontend_customer/base.html" %}
+
+{% block title %} {{ merchant.name }} {% endblock title %}
+
+{% block content %}
+
+<div id="my-loader" class="loader">
+<div class="loader-animation"></div>
+</div>
+
+<div class="container-fluid">
+    <header class="header-div">
+        <div id="category-scrollmenu" class="scrollmenu">
+            <!-- To be populated by JS Menu -->
+        </div>
+    </header>
+
+    <div style="min-height: 60px"></div>
+
+    <div class="row merchant-img mt-3" style="background-image: url('{{ merchant_image }}')">
+    </div>
+
+<div class="row merchant-item-container">
+
+    <!-- To be populated by JS Menu -->
+
+</div>
+
+    <div class="basket-button">
+        <button onclick="populateBasket('{{ base_url }}', '{{ cloudinary_cloud_name }}')" class="green-btn--md basket-button--toggle is-fill" data-toggle="modal" data-target='#basketModal'>
+            <span class="basket-button__title">Mon Panier</span>
+            <span id="see-basket-button-amount" class="basket-button__sum"> 87,88 €</span>
+        </button>
+    </div>
+
+</div>
+
+    <!-- Basket Modal-->
+    <div class="modal fade" id="basketModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog m-0" role="document">
+      <div class="modal-content-shop min-vh-100 min-vw-100 border-none" style="border-radius: 0;">
+        <div class="modal-header div-button-fixed-top">
+            <h5 class="modal-title" id="exampleModalLabel">Mon panier</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body bckg-popup-basket mt-5" style="margin-bottom: 4.5rem;">
+            <div class="row merchant-basket-container">
+
+                <!-- To be populated by JS Menu -->
+
+            </div>
+        </div>
+        <div class="modal-footer div-button-fixed-bottom">
+            <!-- <i onclick='clearBasket()' data-dismiss="modal" class="fa fa-trash" style="min-width: 40px; text-align: center"></i>  -->
+            <button onclick='redirectToPaymentPage("{{ stripe_pk }}", "{{ base_url }}", "{{ table_merchant_id }}", "{{ customer_id }}")' id="validate-cart-button" class="green-btn--md basket-button--toggle is-fill" type="button">Valider mon panier</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Item Detail Modal-->
+    <div class="modal fade" id="itemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog m-0" role="document">
+      <div class="modal-content-shop border-none" style="border-radius: 0; min-height: 100vh; width: 100vw">
+        <div class="modal-body p-0 mb-5">
+
+            <button class="close p-3" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+
+            <div class="modal-item-detail-header-img"></div>
+
+            <div class="pl-3 pr-3 mb-5 product-popup__content">
+                <div class="product-popup__name"></div>
+                <div class="product-popup__info">
+                    <span class="product-popup__description"></span>
+                </div>
+            </div>
+
+            <!--
+            <div id="modal-item-detail-custom-container">
+                <div class="pl-3 pr-3 mb-5 product-popup__custom-name modal-item-detail-custom-indiv">
+                     <div class="product-popup__custom-name">Accompagnements</div>
+                       <ul>
+                           <li></li>
+                       </ul>
+                </div>
+            </div> -->
+
+        </div>
+        <div id="add-to-cart-button-container" class="modal-footer div-button-fixed-bottom">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script type="text/javascript">
+    populateMenu("{{ base_url }}", "{{ table_merchant_id }}", "{{ cloudinary_cloud_name }}");
+    calculateBasketAmount();
+    window.onload = showLoader();
+    window.addEventListener('load', function () {
+        hideLoader()
+    })
+</script>
+
+{% endblock %}

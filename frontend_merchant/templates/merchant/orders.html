@@ -1,0 +1,81 @@
+{% extends "merchant/base.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Commandes à valider</h1>
+          </div>
+
+          <div class="row">
+
+            <!-- Area Table -->
+            <div class="col-md-12 col-xl-12 col-lg-12">
+
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Table</th>
+                        <th scope="col">Client</th>
+                        <th scope="col"># Articles</th>
+                        <th scope="col">Total TTC</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbvOrdersTable">
+
+                  </tbody>
+                </table>
+
+            </div>
+
+          </div>
+
+    <hr>
+    <br>
+        <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Commandes en cours de préparation</h1>
+          </div>
+
+        <div class="row">
+
+            <!-- Area Table -->
+            <div class="col-md-12 col-xl-12 col-lg-12">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Table</th>
+                        <th scope="col">Client</th>
+                        <th scope="col"># Articles</th>
+                        <th scope="col">Total TTC</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbtOrdersTable">
+
+                  </tbody>
+                </table>
+
+            </div>
+
+          </div>
+
+</div>
+
+    <!-- Script Update Orders -->
+    <script type="text/javascript">
+        getTBVOrders('{{ base_url }}', '{{ cloudinary_cloud_name }}');
+        getTBTOrders('{{ base_url }}', '{{ cloudinary_cloud_name }}');
+        setInterval(function() {
+            getTBVOrders('{{ base_url }}', '{{ cloudinary_cloud_name }}');
+            getTBTOrders('{{ base_url }}', '{{ cloudinary_cloud_name }}');
+            }, 30000);
+    </script>
+{% endblock %}

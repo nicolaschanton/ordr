@@ -1,0 +1,143 @@
+{% extends "merchant/base.html" %}
+
+{% block title %} Factures clients {% endblock title %}
+
+{% block content %}
+
+<div class="container-fluid">
+<div class="row">
+                <div class="col-lg-2">
+                  <div class="card bg-primary text-white shadow">
+                      <a href="../customer_orders_done?month={{ period_tuple.4.0 }}&year={{ period_tuple.4.1 }}" class="text-white">
+                        <div class="card-body">
+                          {{ period_tuple.4.0 }}/{{ period_tuple.4.1 }}
+                        </div>
+                      </a>
+                  </div>
+                </div>
+                <div class="col-lg-2">
+                  <div class="card bg-success text-white shadow">
+                      <a href="../customer_orders_done?month={{ period_tuple.3.0 }}&year={{ period_tuple.3.1 }}" class="text-white">
+                          <div class="card-body">
+                            {{ period_tuple.3.0 }}/{{ period_tuple.3.1 }}
+                        </div>
+                      </a>
+                  </div>
+                </div>
+                <div class="col-lg-2">
+                  <div class="card bg-info text-white shadow">
+                      <a href="../customer_orders_done?month={{ period_tuple.2.0 }}&year={{ period_tuple.2.1 }}" class="text-white">
+                          <div class="card-body">
+                              {{ period_tuple.2.0 }}/{{ period_tuple.2.1 }}
+                          </div>
+                      </a>
+                  </div>
+                </div>
+                <div class="col-lg-2">
+                  <div class="card bg-warning text-white shadow">
+                      <a href="../customer_orders_done?month={{ period_tuple.1.0 }}&year={{ period_tuple.1.1 }}" class="text-white">
+                          <div class="card-body">
+                            {{ period_tuple.1.0 }}/{{ period_tuple.1.1 }}
+                          </div>
+                      </a>
+                  </div>
+                </div>
+                <div class="col-lg-2">
+                  <div class="card bg-danger text-white shadow">
+                      <a href="../customer_orders_done?month={{ period_tuple.0.0 }}&year={{ period_tuple.0.1 }}" class="text-white">
+                          <div class="card-body">
+                              {{ period_tuple.0.0 }}/{{ period_tuple.0.1 }}
+                          </div>
+                      </a>
+                  </div>
+                </div>
+                <div class="col-lg-2">
+                  <div class="card bg-secondary text-white shadow">
+                      <a href="../customer_orders_done?month={{ current_month }}&year={{ current_year }}" class="text-white">
+                          <div class="card-body">
+                              {{ current_month }}/{{ current_year }}
+                          </div>
+                      </a>
+                  </div>
+                </div>
+              </div>
+<hr>
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Commandes terminées -
+                {% if selected_month == 1 %}
+                    Janvier
+                {% elif selected_month == 2 %}
+                    Février
+                {% elif selected_month == 3 %}
+                    Mars
+                {% elif selected_month == 4 %}
+                    Avril
+                {% elif selected_month == 5 %}
+                    Mai
+                {% elif selected_month == 6 %}
+                    Juin
+                {% elif selected_month == 7 %}
+                    Juillet
+                {% elif selected_month == 8 %}
+                    Août
+                {% elif selected_month == 9 %}
+                    Septembre
+                {% elif selected_month == 10 %}
+                    Octobre
+                {% elif selected_month == 11 %}
+                    Novembre
+                {% else %}
+                    Décembre
+                {% endif %}
+
+                {{ selected_year }}</h1>
+
+              <!-- Download
+          {% if customer_orders_done %}
+              <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Tout télécharger</a>
+            {% else %}
+          {% endif %}
+          -->
+
+          </div>
+          <div class="row">
+
+            <!-- Area Table -->
+            <div class="col-md-12 col-xl-12 col-lg-12">
+
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Total HT</th>
+                        <th scope="col">Total TTC</th>
+                        <th scope="col">Client</th>
+                        <th scope="col">Facture PDF</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for order in customer_orders_done %}
+                    <tr>
+                        <td>{{ order.id|make_list|slice:':5'|join:'' }}</td>
+                        <td>{{ order.order_date|date:"d/m/Y" }}</td>
+                        <td>{{ order.total_amount_vat_excluded|floatformat:2 }} €</td>
+                        <td>{{ order.total_amount_vat_included|floatformat:2 }} €</td>
+                        <td>{{ order.customer.full_name }}</td>
+                        <td>
+
+                        </td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+{% endblock %}

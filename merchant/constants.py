@@ -1,0 +1,2 @@
+TABLE_SERVICE = 'ts'
+BAR_SERVICE = 'bs'

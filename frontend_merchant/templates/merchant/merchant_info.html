@@ -1,0 +1,175 @@
+{% extends "merchant/base.html" %}
+
+{% block title %} Commerce {% endblock title %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Mon commerce</h1>
+          </div>
+
+          <!-- Infos générales -->
+          <div class="row">
+              <div class="col-lg-12 mb-4">
+
+                  <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                      <h6 class="m-0 font-weight-bold text-primary">Informations générales</h6>
+                    </div>
+
+                     <div class="card-body">
+                            <form class="user">
+                                <div class="form-group row">
+
+                                  <div class="col-sm-6 mb-3">
+                                      <label>Nom du commerce</label>
+                                    <input type="text" class="form-control form-control-user" id="MerchantName" disabled>
+                                  </div>
+
+                                  <div class="col-sm-4 mb-3">
+                                      <label>Commerce ouvert ?</label>
+                                      <input style="min-height: 20px" type="checkbox" class="form-control form-control-user" id="MerchantOpen">
+                                  </div>
+
+                                    <div class="col-sm-12 mb-3">
+                                        <label>Description</label>
+                                        <textarea style="min-height: 80px" type="text" class="form-control form-control-user" id="MerchantDescription"></textarea>
+                                    </div>
+
+                                    <div class="col-sm-6 mb-3">
+                                      <label>Numéro SIRET</label>
+                                    <input type="text" class="form-control form-control-user" id="MerchantRegistrationNumber" disabled>
+                                  </div>
+
+                                    <div class="col-sm-6 mb-3">
+                                      <label>Numéro de TVA</label>
+                                    <input type="text" class="form-control form-control-user" id="MerchantVatNumber" disabled>
+                                  </div>
+
+                                    <div class="col-sm-6 mb-3">
+                                      <label>Adresse (rue)</label>
+                                    <input type="text" class="form-control form-control-user" id="MerchantAddressStreet">
+                                  </div>
+
+                                    <div class="col-sm-6 mb-3">
+                                      <label>Adresse (ville)</label>
+                                    <input type="text" class="form-control form-control-user" id="MerchantAddressCity">
+                                  </div>
+
+                                    <div class="col-sm-6 mb-3">
+                                      <label>Adresse (code postal)</label>
+                                    <input type="text" class="form-control form-control-user" id="MerchantAddressZip">
+                                  </div>
+
+                                </div>
+
+                                <hr>
+
+                                <button onclick="updateInfoGeneral('{{ base_url }}', '{{ merchant.id }}')" class="btn btn-success" type="button" data-dismiss="modal">Sauvegarder</button>
+
+                              </form>
+                     </div>
+                </div>
+
+              </div>
+          </div>
+
+
+        <div class="row">
+
+            <!-- Infos sur le service -->
+            <div class="col-lg-6 mb-4">
+                 <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                          <h6 class="m-0 font-weight-bold text-primary">Informations concernant le service</h6>
+                        </div>
+                        <div class="card-body">
+                            <form class="user">
+                                <div class="form-group row">
+
+                                  <div class="col-sm-8 mb-3">
+                                      <label>Service au bar possible ?</label>
+                                  </div>
+
+                                    <div class="col-sm-4 mb-3">
+                                    <input style="min-height: 20px" type="checkbox" class="form-control form-control-user" id="MerchantServiceBar">
+                                  </div>
+
+                                  <div class="col-sm-8 mb-3">
+                                      <label>Service à la table possible ?</label>
+                                  </div>
+
+                                    <div class="col-sm-4 mb-3">
+                                    <input style="min-height: 20px" type="checkbox" class="form-control form-control-user" id="MerchantServiceTable">
+                                  </div>
+
+                                    <div class="col-sm-8 mb-3">
+                                      <label>Paiement en liquide / ticket restaurant possible ?</label>
+                                  </div>
+
+                                    <div class="col-sm-4 mb-3">
+                                    <input style="min-height: 20px" type="checkbox" class="form-control form-control-user" id="MerchantPayment">
+                                  </div>
+
+                                </div>
+
+                                <hr>
+
+                                <button onclick="updateInfoService('{{ base_url }}', '{{ merchant.id }}')" class="btn btn-success" type="button" data-dismiss="modal">Sauvegarder</button>
+
+                              </form>
+                        </div>
+                    </div>
+
+            </div>
+
+            <!-- Infos du Gérant -->
+            <div class="col-lg-6 mb-4">
+
+                  <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                          <h6 class="m-0 font-weight-bold text-primary">Informations du Gérant</h6>
+                        </div>
+                        <div class="card-body">
+                            <form class="user">
+                                <div class="form-group row">
+
+                                  <div class="col-sm-12 mb-3">
+                                      <label>Prénom du Gérant</label>
+                                    <input type="text" class="form-control form-control-user" id="MerchantOwnerName">
+                                  </div>
+
+                                    <div class="col-sm-12 mb-3">
+                                      <label>Email du Gérant</label>
+                                    <input type="email" class="form-control form-control-user" id="MerchantEmail">
+                                  </div>
+
+                                    <div class="col-sm-12 mb-3">
+                                      <label>Téléphone du Gérant</label>
+                                    <input type="text" class="form-control form-control-user" id="MerchantPhone">
+                                  </div>
+
+                                </div>
+
+                                <hr>
+
+                                <button onclick="updateInfoOwner('{{ base_url }}', '{{ merchant.id }}')" class="btn btn-success" type="button" data-dismiss="modal">Sauvegarder</button>
+
+                              </form>
+                        </div>
+                    </div>
+
+              </div>
+
+          </div>
+
+        </div>
+
+<script type="text/javascript">
+    populateMerchantInfo('{{ base_url }}', '{{ merchant.id }}');
+</script>
+
+{% endblock %}

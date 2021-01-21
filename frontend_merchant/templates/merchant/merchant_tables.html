@@ -1,0 +1,49 @@
+{% extends "merchant/base.html" %}
+
+{% block title %} Tables {% endblock title %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Mes tables</h1>
+          </div>
+
+          <div class="row">
+
+            <!-- Area Table -->
+            <div class="col-md-12 col-xl-12 col-lg-12">
+
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Commandes réalisées</th>
+                        <th scope="col">Ventes total TTC</th>
+                        <th scope="col">QR Code</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for table in merchant_tables %}
+                    <tr>
+                        <td>{{ table.0 }}</td>
+                        <td>{{ table.1|floatformat:0 }}</td>
+                        <td>{{ table.2|floatformat:2 }} €</td>
+                        <td>
+                            <a href="{{ table.3 }}" target="_blank" class="btn btn-success">Voir</a>
+                        </td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+{% endblock %}

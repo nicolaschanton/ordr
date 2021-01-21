@@ -1,0 +1,41 @@
+{% extends "frontend_customer/base.html" %}
+
+{% block title %} {{ merchant.name }} {% endblock title %}
+
+{% block content %}
+
+<div id="my-loader" class="loader">
+<div class="loader-animation"></div>
+</div>
+
+<div class="container-fluid">
+
+    <header class="header-div">
+        <div class="row">
+            <a class="green-home-button" href="{{ base_url }}/shop/{{ table_merchant_id }}"><i class="fa fa-home text-left" style="line-height: inherit; font-size: 20px"></i></a>
+            <h4 class="text-center" style="margin: auto;">Commande #{{ order.id|make_list|slice:':5'|join:'' }}</h4>
+        </div>
+    </header>
+
+    <div style="min-height: 45px"></div>
+
+    <div class="row merchant-item-container">
+
+        <div id="order-status-dynamic" class="order-status-dynamic">
+
+        </div>
+    <!-- To be populated by JS Menu -->
+
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    clearBasket();
+    window.onload = showLoader();
+    window.addEventListener('load', function () {
+        hideLoader()
+    })
+</script>
+
+{% endblock %}

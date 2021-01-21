@@ -1,0 +1,4 @@
+STATUS_DRAFT = 'dr'
+STATUS_SENT = 'st'
+STATUS_DONE = 'do'
+STATUS_ERROR = 'er'

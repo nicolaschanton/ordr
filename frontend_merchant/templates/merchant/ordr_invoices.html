@@ -1,0 +1,58 @@
+{% extends "merchant/base.html" %}
+
+{% block title %} Factures {% endblock title %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Vos factures</h1>
+          </div>
+
+          <div class="row">
+
+            <!-- Area Table -->
+            <div class="col-md-12 col-xl-12 col-lg-12">
+
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Total HT</th>
+                        <th scope="col">Total TTC</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Facture PDF</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for invoice in ordr_invoices %}
+                    <tr>
+                        <td>{{ invoice.invoice_number_text }}</td>
+                        <td>{{ invoice.invoice_date }}</td>
+                        <td>{{ invoice.invoice_total_amount_vat_excluded|floatformat:2 }} €</td>
+                        <td>{{ invoice.invoice_total_amount_vat_included|floatformat:2 }} €</td>
+                        <td>{% if invoice.invoice_paid is True %}
+                            Payée
+                            {% else %}
+                            En attente de paiement
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ invoice.invoice_pdf.url }}" target="_blank" class="btn btn-success">Télécharger</a>
+                        </td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+{% endblock %}
